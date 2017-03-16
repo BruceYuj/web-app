@@ -1,9 +1,31 @@
 {
-  "index.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "fonts/mui.ttf"
-    ]
-  }
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf",
+			"js/lib/bruceyuj/bruce.h.js",
+			"js/app/index.js",
+			"list.html",
+			"js/lib/jquery/jquery-3.1.1.min.js"
+		],
+		"refer": [
+			"list.html",
+			"menu.html"
+		]
+	},
+	"list.html": {
+		"resources": [
+			"js/app/list.js",
+			"js/lib/bruceyuj/bruce.h.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/lib/jquery/jquery-3.1.1.min.js"
+		]
+	},
+	"menu.html": {
+		"resources": [
+			"css/app/menu.css"
+		]
+	}
 }

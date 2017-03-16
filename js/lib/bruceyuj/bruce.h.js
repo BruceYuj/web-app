@@ -5,10 +5,10 @@ bruce.h = {};
 // page相关
 bruce.h.normalStyle = {top: '45px', bottom: 0};
 
-bruce.h.normalPage = function (id, options) (
-	var opt = $.extend({}, options, qiao.h.normalStyle);
-	return qiao.h.page(id, {styles: opt});
-)
+bruce.h.normalPage = function (id, options) {
+	var opt = $.extend({}, options, bruce.h.normalStyle);
+	return bruce.h.page(id, {styles: opt});
+}
 
 bruce.h.page = function(id, options) {
 	var url = id + '.html';
@@ -17,6 +17,31 @@ bruce.h.page = function(id, options) {
 	options.url = url;
 	return options;
 }
+
+// 提示框相关
+bruce.h.modalOptions = {
+	title: 'title',
+	abtn: '确定',
+	cbtn: ['确定', '取消'],
+	content: 'content'
+}
+
+bruce.h.confirm = function(options, ok, cancel) {
+	var opt = $.extend({}, bruce.h.modalOptions);
+	
+	opt.title = '确认操作';
+	if (typeof options === 'string') {
+		opt.content = options;
+	} else {
+		$.extend(opt, options);
+	}
+	
+	plus.nativeUI.confirm(opt.content, function(e) {
+		 var i = e.index;
+		 if(i == 0 && ok) ok();
+		 if(i == 1 && cancel) cancel();
+	}, opt.title, opt.cbtn);
+};
 
 
 
@@ -72,3 +97,14 @@ bruce.h.query = function (db, sql, func) {
 		});
 	}
 }
+
+// 以下为功能封装-------------------------------
+// 退出
+bruce.h.exit = function () {
+	bruce.h.confirm('确定要退出吗？', function() {
+		plus.runtime.quit();
+	});
+}
+
+
+var db = bruce.h.db();

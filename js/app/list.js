@@ -1,5 +1,11 @@
-mui.init({
-	
+mui.init({	
+	keyEventBind: {
+		backbutton: false,
+		menubutton: false
+	},
+	gestureConfig: {
+		longtap: true
+	}
 });
 
 
@@ -7,11 +13,16 @@ mui.init({
 mui.plusReady(function() {
 	//initialize the list
 	initHelp();
+	
+	// 右滑菜单
+	window.addEventListener('swiperight', function () {
+		plus.webview.getLaunchWebview().evalJS('opMenu();');
+	})
 });
 
 function initHelp() {
 	var help = bruce.h.getItem('help');
-	if (help === null) {
+	if (help == 'first') {
 		bruce.h.update(db, 'create table if not exists t_plan_day_todo (id unique, plan_title, plan_content)');
 		bruce.h.update(db, 'create table if not exists t_plan_day_done (id unique, plan_title, plan_content)');
 		var content = '1.右上角添加事项<br/>2.点击事项查看详情<br/>3.长按事项删除<br/>4.右滑事项完成<br/>5.左滑显示完成事项';
